@@ -1,0 +1,33 @@
+body {
+    overflow-x: hidden;
+}
+
+.com-form label {
+    display: block;
+}
+
+.com-form input {
+    width: 100%;
+    padding: 3px 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+}
+
+.blog-det {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.blog-det img {
+    object-fit: cover;
+    width: 100vw;
+    max-height: 75vh;
+}
+
+.imigo {
+    width: 100vw;
+    max-height: 50vh;
+    background-image: url('{{ post.image.url }}');
+}

@@ -1,0 +1,66 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="blog-det">
+    <div class="flex ">
+        <div class="col-8 flex flex-col justify-center items-center text-left">
+            <img src="{{ post.image.url }}" alt="">
+            <div class="imigo"></div>
+            <h1 class="title text-5xl text-center font-bold mt-10">{{ post.title }}</h1>
+
+            <small class="text-center p-3">Posted at {{ post.date_added }}</small>
+
+            <div class="p-5 mt-5 max-w-4xl text-lg"><strong>{{ post.intro|safe }}</strong></div>
+
+            <div class="p-5 max-w-4xl text-lg">{{ post.body|safe }}</div>
+        </div>
+    </div>
+</div>
+</div>
+
+<hr>
+
+<h2 class="subtitle">Comments</h2>
+
+{% for comment in post.comments.all %}
+<article>
+    <div class="media-content">
+        <div class="content">
+            <p>
+                <strong>{{ comment.name }}</strong> <small>{{ comment.date_added }}</small>
+                <br>
+                {{ comment.body }}
+            </p>
+        </div>
+    </div>
+</article>
+{% empty %}
+<div class="notification">
+    <p>No comments yet</p>
+</div>
+{% endfor %}
+
+<hr>
+
+<h2 class="subtitle text-lg font-bold px-6">Add comment</h2>
+<form method="post" action=".">
+    <div class="com-form sm:overflow-hidden sm:rounded-md">
+        <div class="space-y-6 bg-white px-4 py-5 sm:p-6">
+            <div class="grid gridcols-3 gap-6">
+                <div class="col-span-3 sm:col-span-2">
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <div class="field">
+                        <div class="control">
+                            <button
+                                class="btn inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
